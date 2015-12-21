@@ -12,11 +12,35 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-*/
-package iox.refused;
+ */
+package iox.refused.impl;
 
-import java.io.PrintWriter;
+import iox.refused.IParameter;
+import iox.refused.IRequest;
 
-public interface IRenderer {
-	void process(IParameter req,PrintWriter resp);
+public class Parameter implements IParameter {
+
+    private final String _part;
+    private final IRequest _request;
+
+    public Parameter(String part, IRequest request) {
+        _part = part;
+        _request = request;
+    }
+
+    public Parameter(String part, IParameter par) {
+        _part = part;
+        _request = par.request();
+    }
+
+    @Override
+    public String part() {
+        return _part;
+    }
+
+    @Override
+    public IRequest request() {
+        return _request;
+    }
+
 }

@@ -12,34 +12,24 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-*/
+ */
 package iox.refused.impl;
 
+import iox.refused.IMetaRenderer;
 import iox.refused.IParameter;
-import iox.refused.IRequest;
+import iox.refused.IRenderer;
 
-public class Parameter implements IParameter {
-	private final String _part;
-	private final IRequest _request;
-	
-	public Parameter(String part, IRequest request) {
-		_part = part;
-		_request = request;
-	}
-	
-	public Parameter(String part, IParameter par) {
-		_part = part;
-		_request = par.request();
-	}
+public class RendererWrapper implements IMetaRenderer {
 
-	@Override
-	public String part() {
-		return _part;
-	}
+    private final IRenderer renderer;
 
-	@Override
-	public IRequest request() {
-		return _request;
-	}
+    public RendererWrapper(IRenderer renderer) {
+        super();
+        this.renderer = renderer;
+    }
 
+    @Override
+    public IRenderer process(IParameter req) {
+        return renderer;
+    }
 }

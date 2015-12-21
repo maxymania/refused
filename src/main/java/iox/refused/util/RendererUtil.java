@@ -12,21 +12,27 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-*/
-package iox.refused.impl;
+ */
+package iox.refused.util;
 
 import iox.refused.IMetaRenderer;
-import iox.refused.IParameter;
 import iox.refused.IRenderer;
+import iox.refused.impl.MetaRendererWrapper;
+import iox.refused.impl.RendererWrapper;
 
-public class RendererWrapper implements IMetaRenderer {
-	private final IRenderer renderer;
-	public RendererWrapper(IRenderer renderer) {
-		super();
-		this.renderer = renderer;
-	}
-	@Override
-	public IRenderer process(IParameter req) {
-		return renderer;
-	}
+public class RendererUtil {
+
+    public static IRenderer wrap(Object o) {
+        if (o instanceof IMetaRenderer) {
+            return new MetaRendererWrapper((IMetaRenderer) o);
+        }
+        return (IRenderer) o;
+    }
+
+    public static IMetaRenderer wrapHeavy(Object o) {
+        if (o instanceof IRenderer) {
+            return new RendererWrapper((IRenderer) o);
+        }
+        return (IMetaRenderer) o;
+    }
 }

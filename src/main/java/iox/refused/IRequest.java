@@ -12,23 +12,16 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-*/
-package iox.refused.impl;
+ */
+package iox.refused;
 
-import java.io.PrintWriter;
+import java.util.Map;
 
-import iox.refused.IMetaRenderer;
-import iox.refused.IParameter;
-import iox.refused.IRenderer;
+import javax.servlet.http.HttpServletRequest;
 
-public class MetaRendererWrapper implements IRenderer {
-	private IMetaRenderer renderer;
-	public MetaRendererWrapper(IMetaRenderer renderer) {
-		super();
-		this.renderer = renderer;
-	}
-	@Override
-	public void process(IParameter req, PrintWriter resp) {
-		renderer.process(req).process(req, resp);
-	}
+public interface IRequest {
+
+    HttpServletRequest request();
+
+    Map<String, String> params();
 }

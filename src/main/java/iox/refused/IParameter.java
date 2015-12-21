@@ -12,29 +12,12 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-*/
-package iox.refused.impl;
+ */
+package iox.refused;
 
-import java.util.HashMap;
-import java.util.Map;
+public interface IParameter {
 
-import javax.servlet.http.HttpServletRequest;
+    String part();
 
-import iox.refused.IRequest;
-
-public class CRequest implements IRequest {
-	private HttpServletRequest request;
-	private Map<String,String> params = new HashMap<String,String>();
-	public CRequest(HttpServletRequest request) {
-		super();
-		this.request = request;
-	}
-	@Override
-	public HttpServletRequest request() {
-		return request;
-	}
-	@Override
-	public Map<String, String> params() {
-		return params;
-	}
+    IRequest request();
 }

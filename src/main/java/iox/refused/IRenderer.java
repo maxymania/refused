@@ -12,23 +12,12 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-*/
-package iox.refused.util;
+ */
+package iox.refused;
 
-import iox.refused.IMetaRenderer;
-import iox.refused.IRenderer;
-import iox.refused.impl.MetaRendererWrapper;
-import iox.refused.impl.RendererWrapper;
+import java.io.PrintWriter;
 
-public class RendererUtil {
-	public static IRenderer wrap(Object o){
-		if(o instanceof IMetaRenderer)
-			return new MetaRendererWrapper((IMetaRenderer)o);
-		return (IRenderer)o;
-	}
-	public static IMetaRenderer wrapHeavy(Object o){
-		if(o instanceof IRenderer)
-			return new RendererWrapper((IRenderer)o);
-		return (IMetaRenderer)o;
-	}
+public interface IRenderer {
+
+    void process(IParameter req, PrintWriter resp);
 }
