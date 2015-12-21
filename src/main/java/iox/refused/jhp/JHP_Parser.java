@@ -62,12 +62,26 @@ public class JHP_Parser {
             buffer.append("void echo(Object obj){resp.print(obj);}\n");
             compile(buffer, src);
             buffer.append("\n}\nreturn (IRenderer)this;");
+        } else if (init == null) {
+            buffer.append("void process(IParameter req,PrintWriter resp){\n");
+            buffer.append("void echo(Object obj){resp.print(obj);}\n");
+            int n = 0;
+            for (String[] obj : lst) {
+                if (n > 0) {
+                    buffer.append("else ");
+                }
+                buffer.append(
+                        "if(\"" + StringEscapeUtils.escapeJava(obj[0])
+                        + "\".equals(req.part())){\n");
+                compile(buffer, obj[1]);
+                buffer.append("}\n");
+                n++;
+            }
+            buffer.append("\n}\nreturn (IRenderer)this;");
         } else {
             buffer.append("IRenderer process(IParameter req){\n");
             buffer.append("void echo(Object obj){}\n");
-            if (init != null) {
-                compile(buffer, init);
-            }
+            compile(buffer, init);
             buffer.append("return new IRenderer(){\n");
             buffer.append("void process(IParameter req,PrintWriter resp){\n");
             buffer.append("void echo(Object obj){resp.print(obj);}\n");

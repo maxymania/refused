@@ -51,7 +51,6 @@ public class MasterTemplate implements IRenderer, IMetaRenderer {
         }
         if (sb.length() > 0) {
             script.add(new String[]{sb.toString(), null});
-            sb = new StringBuffer();
         }
     }
 
