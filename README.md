@@ -82,7 +82,9 @@ And finally our `program.jhp`.
 ```
 <templ:insert body>
 	<h1>Hello World!</h1>
-	<p>Lorem ipsum ...</p>
+	<p><?jhp
+            echo ("Hello Text!");
+        ?></p>
 </templ:insert>
 ```
 
